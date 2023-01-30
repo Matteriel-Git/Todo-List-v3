@@ -24,6 +24,17 @@ function displayItems() {
                     </div>`
     }
     document.querySelector(".to-do-list").innerHTML = items
+    activateDeleteListeners()
+    activateEditListeners()
+    activateSaveListeners()
+    activateCancelListeners()
+}
+
+function activateDeleteListeners() {
+    let deleteBtn = document.querySelector(".deleteBtn")
+    deleteBtn.forEach((db, i) => {
+        db.addEventListener("click", () => { deleteItem(i) })
+    })
 }
 
 function createItem(item){
