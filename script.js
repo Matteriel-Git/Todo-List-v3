@@ -1,9 +1,15 @@
 const itemsArray = localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : []
 console.log(itemsArray);
 
+let initialValue = "Enter a Task..."
+
+let query = document.getElementById("item")
+
+
 document.querySelector("#enter").addEventListener("click", () => {
     const item = document.querySelector("#item")
     createItem(item)
+    query.value =  initialValue
 })
 
 function displayItems() {
@@ -31,16 +37,62 @@ function displayItems() {
 }
 
 function activateDeleteListeners() {
-    let deleteBtn = document.querySelector(".deleteBtn")
+    let deleteBtn = document.querySelectorAll(".deleteBtn")
     deleteBtn.forEach((db, i) => {
         db.addEventListener("click", () => { deleteItem(i) })
     })
 }
 
+function activateEditListeners() {
+    const editBtn = document.querySelectorAll(".editBtn")
+    const updateController = document.querySelectorAll(".update-controller")
+    const inputs = document.querySelectorAll(".input-controller textarea")
+    editBtn.forEach((eb, i) => {
+        eb.addEventListener("click", () => {
+            updateController[i].style.display = "block"
+            inputs[i].disabled = false
+        })
+    })
+}
+
+function activateSaveListeners(){
+    const saveBtn = document.querySelectorAll(".saveBtn")
+    const inputs = document.querySelectorAll(".input-controller textarea")
+    saveBtn.forEach((sb, i) => {
+        sb.addEventListener("click", () => {
+            updateItem(inputs[i].value, i)
+        })
+    })
+}
+
+function activateCancelListeners() {
+    const cancelBtn = document.querySelectorAll(".cancelBtn")
+    const updateController = document.querySelectorAll(".update-controller")
+    const inputs = document.querySelectorAll(".input-controller textarea")
+    cancelBtn.forEach((cb, i) => {
+        cb.addEventListener("click", () => {
+            updateController[i].style.display = "none"
+            inputs[i].disabled = true
+        })
+    })
+}
+
+function updateItem(text, i) {
+itemsArray[i] = text
+localStorage.setItem("items", JSON.stringify(itemsArray))
+location.reload()
+}
+
+function deleteItem(i){
+    itemsArray.splice(i, 1)
+    localStorage.setItem("items", JSON.stringify(itemsArray))
+    location.reload()
+}
+
 function createItem(item){
     itemsArray.push(item.value)
-    localStorage.setItem("items", JSON.stringify(itemsArray));
-    location.reload();
+    localStorage.setItem("items", JSON.stringify(itemsArray))
+    location.reload()
 }
 
 function displayDate() {
