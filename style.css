@@ -149,3 +149,10 @@ i.fa-solid.fa-check.deleteBtn:active {
 i.fa-solid.fa-pen-to-square.editBtn:active{
     color: rgb(202, 202, 20);
   }
+
+  footer {
+    color: rgba(255, 255, 255, 0.575);
+    text-align: center;
+    padding-top: 390px;
+    font: italic;
+  }
