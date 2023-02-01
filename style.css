@@ -141,3 +141,11 @@
     }
   
   }
+
+i.fa-solid.fa-check.deleteBtn:active {
+    color: rgb(5, 167, 5);
+  }
+
+i.fa-solid.fa-pen-to-square.editBtn:active{
+    color: rgb(202, 202, 20);
+  }
